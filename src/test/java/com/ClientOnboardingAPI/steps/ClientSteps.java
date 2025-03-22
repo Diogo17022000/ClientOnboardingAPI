@@ -24,9 +24,9 @@ public class ClientSteps {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private Map<String, Object> cliente; // Dados do cliente atual
-    private ResponseEntity<String> response; // Resposta da requisição
-    private Long clienteId; // ID do cliente consultado ou selecionado
+    private Map<String, Object> cliente;
+    private ResponseEntity<String> response;
+    private Long clienteId;
 
     // Cenário de criação de cliente com dados dinâmicos
     @Given("um cliente válido com dados dinâmicos")
@@ -112,20 +112,16 @@ public class ClientSteps {
     @Then("a resposta deve conter a mensagem {string}")
     public void aRespostaDeveConterAMensagem(String mensagemEsperada) {
         try {
-            // Verifica se a resposta é JSON ou uma mensagem simples
             if (response.getBody().startsWith("{")) {
-                // Trata como JSON
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode rootNode = objectMapper.readTree(response.getBody());
 
-                // Verifica se a chave "Clientes cadastrados" existe
                 if (mensagemEsperada.equals("Clientes cadastrados:")) {
                     assertThat(rootNode.has("Clientes cadastrados")).isTrue();
                 } else {
                     assertThat(response.getBody()).contains(mensagemEsperada);
                 }
             } else {
-                // Trata como mensagem simples
                 assertThat(response.getBody()).contains(mensagemEsperada);
             }
         } catch (Exception e) {

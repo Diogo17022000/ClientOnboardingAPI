@@ -11,5 +11,4 @@ import org.junit.runner.RunWith;
         glue = "com.ClientOnboardingAPI.steps"
 )
 public class TestCucumberRunner {
-    // Runner para executar os testes
 }

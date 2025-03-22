@@ -16,9 +16,9 @@ public class ClienteService {
 
     public Cliente criarCliente(Cliente cliente) {
         if (clienteRepository.existsByCpf(cliente.getCpf())) {
-            throw new RuntimeException("CPF já cadastrado!"); // Lança exceção se o CPF já existir
+            throw new RuntimeException("CPF já cadastrado!");
         }
-        return clienteRepository.save(cliente); // Salva o cliente, caso o CPF seja único
+        return clienteRepository.save(cliente);
     }
 
     public List<Cliente> listarClientes() {
